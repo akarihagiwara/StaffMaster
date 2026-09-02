@@ -1,0 +1,12 @@
+# 個人設定
+.vscode/
+
+# ログ
+*.log
+
+# H2 のローカルデータベース
+backend/data/
+
+# OS が自動作成する不要ファイル
+.DS_Store
+Thumbs.db
