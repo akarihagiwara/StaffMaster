@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .securityContext(securityContext -> securityContext
                         .securityContextRepository(securityContextRepository))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/login").permitAll()
+                        .requestMatchers("/api/login", "/api/health").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll())
