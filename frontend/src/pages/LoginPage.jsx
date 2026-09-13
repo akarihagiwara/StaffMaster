@@ -1,56 +1,66 @@
-import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { login as loginRequest } from '../api/staffApi'
-import { useAuth } from '../contexts/useAuth'
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { login as loginRequest } from "../api/staffApi";
+import { useAuth } from "../contexts/useAuth";
 
 function LoginPage() {
-  const navigate = useNavigate()
-  const { isLoggedIn, login: saveLogin } = useAuth()
+  const navigate = useNavigate();
+  const { isLoggedIn, login: saveLogin } = useAuth();
 
-  const [loginId, setLoginId] = useState('')
-  const [loginPassword, setLoginPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [loginId, setLoginId] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (isLoggedIn) {
-    return <Navigate to="/staff" replace />
+    return <Navigate to="/staff" replace />;
   }
 
   async function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    if (!loginId.trim() || !loginPassword.trim()) {
-      setErrorMessage('ログインIDとログインパスワードを入力してください。')
-      return
+    if (!loginId.trim()) {
+      setErrorMessage("ログインIDを入力してください。");
+      return;
+    }
+    if (!loginPassword.trim()) {
+      setErrorMessage("ログインパスワードを入力してください。");
+      return;
     }
 
-    setErrorMessage('')
-    setIsSubmitting(true)
+    setErrorMessage("");
+    setIsSubmitting(true);
 
     try {
       const staff = await loginRequest({
         loginId,
         loginPassword,
-      })
+      });
 
-      saveLogin(staff)
-      navigate('/staff')
-    } catch (error) {
-      setErrorMessage(error.message)
+      saveLogin(staff);
+      navigate("/staff");
+    } catch {
+      setErrorMessage("ログインIDまたはログインパスワードが正しくありません。");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
   return (
     <main className="login-page">
-      <section className="login-card">
-        <h1>StaffMaster ログイン</h1>
+      <section className="login-card" aria-labelledby="login-title">
+        <header className="login-heading">          
+          <h1 id="login-title">スタッフ管理システム</h1>
+        </header>
 
-        {errorMessage && <p role="alert">{errorMessage}</p>}
+        {errorMessage && (
+          <p className="login-error" role="alert">
+            {errorMessage}
+          </p>
+        )}
 
-        <form onSubmit={handleSubmit} noValidate>
-          <div>
+        <form className="login-form" onSubmit={handleSubmit} noValidate>
+          <div className="form-field">
             <label htmlFor="loginId">ログインID</label>
             <input
               id="loginId"
@@ -61,8 +71,8 @@ function LoginPage() {
             />
           </div>
 
-          <div>
-            <label htmlFor="loginPassword">ログインパスワード</label>
+          <div className="form-field">
+            <label htmlFor="loginPassword">パスワード</label>
             <input
               id="loginPassword"
               type="password"
@@ -72,13 +82,17 @@ function LoginPage() {
             />
           </div>
 
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'ログイン中...' : 'ログイン'}
+          <button
+            className="login-submit"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "ログイン中..." : "ログイン"}
           </button>
         </form>
       </section>
     </main>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

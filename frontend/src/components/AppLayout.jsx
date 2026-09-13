@@ -26,13 +26,8 @@ function AppLayout() {
     <>
       <header className="app-header">
         <Link to="/staff" className="app-title">
-          StaffMaster
+          スタッフ管理システム
         </Link>
-
-        <nav>
-          <Link to="/staff">スタッフ一覧</Link>
-          <Link to="/staff/new">スタッフ登録</Link>
-        </nav>
 
         <div>
           <span>{currentStaff.staffName} さん</span>{" "}
@@ -41,9 +36,12 @@ function AppLayout() {
           </button>
           {logoutErrorMessage && <p role="alert">{logoutErrorMessage}</p>}
         </div>
+
+     
       </header>
 
       <main className="app-main">
+        
         <Outlet />
       </main>
     </>

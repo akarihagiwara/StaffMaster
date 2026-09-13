@@ -1,13 +1,12 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
-import AppLayout from './components/AppLayout'
-import ProtectedRoute from './components/ProtectedRoute'
-import LoginPage from './pages/LoginPage'
-import StaffListPage from './pages/StaffListPage'
-import StaffDetailPage from './pages/StaffDetailPage'
-import StaffCreatePage from './pages/StaffCreatePage'
-import StaffEditPage from './pages/StaffEditPage'
-import NotFoundPage from './pages/NotFoundPage'
-import './App.css'
+import { Navigate, Route, Routes } from "react-router-dom";
+import AppLayout from "./components/AppLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
+import LoginPage from "./pages/LoginPage";
+import StaffListPage from "./pages/StaffListPage";
+import StaffCreatePage from "./pages/StaffCreatePage";
+import StaffEditPage from "./pages/StaffEditPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import "./App.css";
 
 function App() {
   return (
@@ -19,14 +18,14 @@ function App() {
         <Route element={<AppLayout />}>
           <Route path="/staff" element={<StaffListPage />} />
           <Route path="/staff/new" element={<StaffCreatePage />} />
-          <Route path="/staff/:staffId" element={<StaffDetailPage />} />
+          <Route path="/staff/:staffId" element={<StaffEditPage />} />
           <Route path="/staff/:staffId/edit" element={<StaffEditPage />} />
         </Route>
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;
