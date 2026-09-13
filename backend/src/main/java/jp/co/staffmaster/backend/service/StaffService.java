@@ -47,7 +47,24 @@ public class StaffService {
         response.setPositionId(staff.getPositionId());
         response.setEmail(staff.getEmail());
         response.setLoginId(staff.getLoginId());
+        if (staff.getDepartment() != null) {
+            response.setDepartmentName(
+                    staff.getDepartment().getDepartmentName());
+        }
+
+        if (staff.getPosition() != null) {
+            response.setPositionName(
+                    staff.getPosition().getPositionName());
+        }
         return response;
+    }
+
+    private String blankToNull(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+
+        return value;
     }
 
     public StaffResponse create(StaffRequest request) {
@@ -66,8 +83,8 @@ public class StaffService {
         Staff staff = new Staff();
         staff.setStaffId(request.getStaffId());
         staff.setStaffName(request.getStaffName());
-        staff.setDepartmentId(request.getDepartmentId());
-        staff.setPositionId(request.getPositionId());
+        staff.setDepartmentId(blankToNull(request.getDepartmentId()));
+        staff.setPositionId(blankToNull(request.getPositionId()));
         staff.setEmail(request.getEmail());
         staff.setLoginId(request.getLoginId());
         staff.setLoginPassword(request.getLoginPassword());
@@ -92,8 +109,8 @@ public class StaffService {
         }
 
         staff.setStaffName(request.getStaffName());
-        staff.setDepartmentId(request.getDepartmentId());
-        staff.setPositionId(request.getPositionId());
+        staff.setDepartmentId(blankToNull(request.getDepartmentId()));
+        staff.setPositionId(blankToNull(request.getPositionId()));
         staff.setEmail(request.getEmail());
         staff.setLoginId(request.getLoginId());
         staff.setLoginPassword(request.getLoginPassword());

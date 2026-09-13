@@ -1,4 +1,5 @@
 package jp.co.staffmaster.backend.dto;
+
 import jp.co.staffmaster.backend.entity.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,6 +11,8 @@ public class StaffResponse {
     private String positionId;
     private String email;
     private String loginId;
+    private String departmentName;
+    private String positionName;
 
     public String getStaffId() {
         return staffId;
@@ -62,5 +65,21 @@ public class StaffResponse {
     public interface StaffRepository extends JpaRepository<Staff, String> {
 
         boolean existsByLoginId(String loginId);
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
     }
 }
