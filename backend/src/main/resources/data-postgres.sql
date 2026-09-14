@@ -55,6 +55,34 @@ VALUES
         'jiro@example.com',
         'dev0001',
         'dev1234'
-    );
+    ) ON CONFLICT (staff_id) DO NOTHING;
+
+(
+    'S001',
+    '管理 太郎',
+    'D001',
+    'P001',
+    'admin@example.com',
+    'admin01',
+    'pass123'
+),
+(
+    'S002',
+    '営業 花子',
+    'D002',
+    'P002',
+    'hanako@example.com',
+    'sales01',
+    'sales123'
+),
+(
+    'S003',
+    '開発 次郎',
+    'D003',
+    'P003',
+    'jiro@example.com',
+    'dev0001',
+    'dev1234'
+);
 
 ON CONFLICT (staff_id) DO NOTHING;
